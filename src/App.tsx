@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "./components/layout";
 
 const App = () => {
-  return <h1>Hello, Snapp!</h1>;
+  return <Layout />;
 };
 
 export default App;
