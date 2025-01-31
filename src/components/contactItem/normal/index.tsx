@@ -1,30 +1,50 @@
 import React from "react";
-import { CompassOutlined, PhoneOutlined } from "@ant-design/icons";
-import sampleAvatar from "../../../assets/sampleAvatar.png";
+import {
+  CompassOutlined,
+  PhoneOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useStyles } from "../style";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface ContactItemProps {
   ref?: ((node: HTMLDivElement | null) => void) | null;
+  info: {
+    avatarPic?: string;
+    name: string;
+    phone: string;
+    city?: string;
+  };
 }
 
-function ContactItem({ ref }: ContactItemProps) {
+function ContactItem({ ref, info }: ContactItemProps) {
   const classes = useStyles();
 
   return (
     <div ref={ref} className={classes.container}>
       <div className={classes.avatarContainer}>
-        <img src={sampleAvatar} alt="Logo" style={{ width: "100%" }} />
+        {info.avatarPic ? (
+          <LazyLoadImage
+            src={info.avatarPic}
+            alt="avatar"
+            effect="blur" // Blur effect before the image loads
+            width="100%"
+          />
+        ) : (
+          <UserOutlined className={classes.avatarPlaceholderIcon} />
+        )}
       </div>
       <div>
-        <div style={{ marginBottom: 8 }}>Pedram Sheikhrahimi</div>
+        <div style={{ marginBottom: 8 }}>{info.name}</div>
         <div className={classes.info}>
           <span>
             <PhoneOutlined style={{ marginRight: 4 }} />
-            +989907735261
+            {info.phone}
           </span>
           <span style={{ marginLeft: 10 }}>
             <CompassOutlined style={{ marginRight: 4 }} />
-            Tehran
+            {info.city ? info.city : "N/A"}
           </span>
         </div>
       </div>

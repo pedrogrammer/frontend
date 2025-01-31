@@ -11,11 +11,18 @@ export const useStyles = createUseStyles(
       boxShadow: `${lightShade} 0px 1px 4px`,
     },
     avatarContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       backgroundColor: bgShade,
       width: 60,
       height: 60,
       borderRadius: "50%",
       overflow: "hidden",
+    },
+    avatarPlaceholderIcon: {
+      fontSize: 30,
+      color: lightText,
     },
     info: {
       fontSize: 14,
