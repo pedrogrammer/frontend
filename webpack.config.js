@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   mode: "development",
@@ -42,6 +43,7 @@ module.exports = {
       failOnError: false, // Prevent Webpack from stopping on lint errors
       emitWarning: true, // Show warnings in terminal
     }),
+    new BundleAnalyzerPlugin(),
   ],
   devServer: {
     static: path.join(__dirname, "dist"),
