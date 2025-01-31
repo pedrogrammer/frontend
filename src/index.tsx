@@ -15,15 +15,17 @@ import { ThemeProvider } from "react-jss";
 import { lightTheme, Theme } from "./core/theme";
 import { ConfigProvider } from "antd";
 
+import { toast } from "react-toastify";
+
 // Handle global errors
 const handleGlobalError = (error: unknown) => {
   if (error instanceof AxiosError) {
     if (!error.response) {
       // No response from server (likely network error or API is down)
-      // ShowErrorNotification("Network issue: Check your internet connection.");
+      toast.error("Network issue: Check your internet connection.");
     } else if (error.response.status >= 500) {
       // Server-side error
-      // ShowErrorNotification("Server is experiencing issues. Try again later.");
+      toast.error("Server is experiencing issues. Try again later.");
     }
   }
 };

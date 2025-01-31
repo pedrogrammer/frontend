@@ -1,7 +1,11 @@
 import React, { useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "antd";
-import { SearchOutlined, XFilled } from "@ant-design/icons";
+import {
+  ExclamationCircleOutlined,
+  SearchOutlined,
+  XFilled,
+} from "@ant-design/icons";
 import RecentContacts from "../../recentContacts";
 import { ContactItem, SkeletonContactItem } from "../../contactItem";
 import { useStyles } from "./style";
@@ -16,6 +20,7 @@ function ContactList() {
     hasNextPage,
     isFetchingNextPage,
     isLoading: isInitialLoading,
+    isError,
   } = useGetContactList();
 
   // Create a reference for the last contact item
@@ -43,6 +48,7 @@ function ContactList() {
       variant="filled"
       size="large"
       suffix={<SearchOutlined className="searchIcon" />}
+      disabled={isError}
     />
   );
 
@@ -74,20 +80,38 @@ function ContactList() {
       <SkeletonContactItem key={item} />
     ));
 
+  const listErrorElement = (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        alignItems: "center",
+        paddingTop: 20,
+      }}
+    >
+      <ExclamationCircleOutlined style={{ color: "red", fontSize: 50 }} />
+      <p>Oops, there was an error getting list!</p>
+    </div>
+  );
+
   return (
     <>
       <SearchInput />
       <RecentContacts />
       <div className={classes.allContacts}>
         <AllContactsLabel />
-        {isInitialLoading ? (
-          renderSkeletons()
-        ) : (
-          <div className={classes.contactListContainer}>
-            {isFetchingNextPage && <SkeletonContactItem />}
-            {renderContactItems()}
-          </div>
-        )}
+        <div className={classes.contactListContainer}>
+          {isInitialLoading ? (
+            renderSkeletons()
+          ) : (
+            <>
+              {renderContactItems()}
+              {isFetchingNextPage && <SkeletonContactItem />}
+            </>
+          )}
+          {isError && listErrorElement}
+        </div>
       </div>
       {/* <Link to={`/contact/1`}>Contact #1</Link> */}
     </>
