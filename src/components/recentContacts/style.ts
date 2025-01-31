@@ -1,0 +1,12 @@
+import { createUseStyles } from "react-jss";
+import { Theme } from "../../core/theme";
+
+export const useStyles = createUseStyles(({ premier }: Theme) => ({
+  empty: {
+    paddingBlock: "20px 12px",
+    marginBlock: "0",
+  },
+  bulletIcon: {
+    color: premier,
+  },
+}));

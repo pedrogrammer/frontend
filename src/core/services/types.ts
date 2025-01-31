@@ -13,3 +13,13 @@ export type ContactResponseType = {
   updatedAt: number;
   id: number;
 };
+
+export type ContactListResponseType = {
+  meta: {
+    skipped: number;
+    limit: number;
+    total: number;
+    criteria: {};
+  };
+  items: ContactResponseType[];
+};

@@ -3,11 +3,15 @@ import { CompassOutlined, PhoneOutlined } from "@ant-design/icons";
 import sampleAvatar from "../../../assets/sampleAvatar.png";
 import { useStyles } from "../style";
 
-function ContactItem() {
+interface ContactItemProps {
+  ref?: ((node: HTMLDivElement | null) => void) | null;
+}
+
+function ContactItem({ ref }: ContactItemProps) {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <div ref={ref} className={classes.container}>
       <div className={classes.avatarContainer}>
         <img src={sampleAvatar} alt="Logo" style={{ width: "100%" }} />
       </div>

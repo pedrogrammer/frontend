@@ -5,9 +5,7 @@ export const useStyles = createUseStyles(
   ({ lightShade, bgShade, lightText }: Theme) => ({
     container: {
       display: "flex",
-      flex: 1,
       gap: 10,
-      marginTop: 10,
       padding: 10,
       borderRadius: 8,
       boxShadow: `${lightShade} 0px 1px 4px`,

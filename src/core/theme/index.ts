@@ -6,6 +6,7 @@ interface Theme {
   bgShade: string;
   text: string;
   lightText: string;
+  premier: string;
 }
 
 const lightTheme: Theme = {
@@ -16,6 +17,7 @@ const lightTheme: Theme = {
   bgShade: "#F0F0F0",
   text: "#373C42",
   lightText: "#8B9099",
+  premier: "#ffd700",
 };
 
 export { lightTheme };
