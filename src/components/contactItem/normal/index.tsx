@@ -10,23 +10,21 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface ContactItemProps {
   ref?: ((node: HTMLDivElement | null) => void) | null;
-  info: {
-    avatarPic?: string;
-    name: string;
-    phone: string;
-    city?: string;
-  };
+  avatarPic?: string;
+  name: string;
+  phone: string;
+  city?: string;
 }
 
-function ContactItem({ ref, info }: ContactItemProps) {
+function ContactItem({ ref, avatarPic, name, phone, city }: ContactItemProps) {
   const classes = useStyles();
 
   return (
     <div ref={ref} className={classes.container}>
       <div className={classes.avatarContainer}>
-        {info.avatarPic ? (
+        {avatarPic ? (
           <LazyLoadImage
-            src={info.avatarPic}
+            src={avatarPic}
             alt="avatar"
             effect="blur" // Blur effect before the image loads
             width="100%"
@@ -36,15 +34,15 @@ function ContactItem({ ref, info }: ContactItemProps) {
         )}
       </div>
       <div>
-        <div style={{ marginBottom: 8 }}>{info.name}</div>
+        <div style={{ marginBottom: 8 }}>{name}</div>
         <div className={classes.info}>
           <span>
             <PhoneOutlined style={{ marginRight: 4 }} />
-            {info.phone}
+            {phone}
           </span>
           <span style={{ marginLeft: 10 }}>
             <CompassOutlined style={{ marginRight: 4 }} />
-            {info.city ? info.city : "N/A"}
+            {city ? city : "N/A"}
           </span>
         </div>
       </div>

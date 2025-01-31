@@ -69,12 +69,10 @@ function ContactList() {
           <ContactItem
             key={contact.id}
             ref={isLastItem ? lastContactRef : null}
-            info={{
-              avatarPic: contact.avatar,
-              name: `${contact.first_name} ${contact.last_name}`,
-              city: contact.address,
-              phone: contact.phone,
-            }}
+            avatarPic={contact.avatar}
+            name={`${contact.first_name} ${contact.last_name}`}
+            city={contact.address}
+            phone={contact.phone}
           />
         );
       }),

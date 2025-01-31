@@ -20,14 +20,7 @@ function RecentContacts() {
           className={classes.empty}
         />
       ) : (
-        <ContactItem
-          info={{
-            avatarPic: "",
-            name: "",
-            phone: "",
-            city: "",
-          }}
-        />
+        <ContactItem avatarPic="" name="" phone="" city="" />
       )}
     </div>
   );
