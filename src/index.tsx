@@ -13,6 +13,7 @@ import { AxiosError } from "axios";
 import "./index.css";
 import { ThemeProvider } from "react-jss";
 import { lightTheme, Theme } from "./core/theme";
+import { ConfigProvider } from "antd";
 
 // Handle global errors
 const handleGlobalError = (error: unknown) => {
@@ -43,10 +44,18 @@ const queryClient = new QueryClient({
 
 const theme: Theme = lightTheme;
 
+const antDTheme = {
+  token: {
+    colorPrimary: lightTheme.primary,
+  },
+};
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
-      <App />
+      <ConfigProvider theme={antDTheme}>
+        <App />
+      </ConfigProvider>
     </ThemeProvider>
   </QueryClientProvider>,
 );
