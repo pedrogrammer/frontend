@@ -16,4 +16,4 @@ function SkeletonContactItem() {
   );
 }
 
-export default SkeletonContactItem;
+export default React.memo(SkeletonContactItem);

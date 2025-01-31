@@ -32,4 +32,4 @@ function ContactItem({ ref }: ContactItemProps) {
   );
 }
 
-export default ContactItem;
+export default React.memo(ContactItem);

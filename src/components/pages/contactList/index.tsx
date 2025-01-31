@@ -10,8 +10,13 @@ import { useGetContactList } from "../../../core/services/hooks";
 function ContactList() {
   const classes = useStyles();
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetContactList();
+  const {
+    data: contactListData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading: isInitialLoading,
+  } = useGetContactList();
 
   // Create a reference for the last contact item
   const observer = useRef<IntersectionObserver | null>(null);
@@ -32,55 +37,57 @@ function ContactList() {
     [fetchNextPage, isFetchingNextPage, hasNextPage],
   );
 
+  const SearchInput = () => (
+    <Input
+      placeholder="Search in Snapp! Contacts"
+      variant="filled"
+      size="large"
+      suffix={<SearchOutlined className="searchIcon" />}
+    />
+  );
+
+  const AllContactsLabel = () => (
+    <div style={{ paddingBottom: 5 }}>
+      <XFilled className={classes.bulletIcon} />
+      <label style={{ marginLeft: 8 }}>All Contacts</label>
+    </div>
+  );
+
+  const renderContactItems = () => {
+    return contactListData?.pages.map((page, pageIndex) =>
+      page.items.map((contact, index) => {
+        const isLastItem =
+          pageIndex === contactListData.pages.length - 1 &&
+          index === page.items.length - 1;
+        return (
+          <ContactItem
+            key={contact.id}
+            ref={isLastItem ? lastContactRef : null}
+          />
+        );
+      }),
+    );
+  };
+
+  const renderSkeletons = () =>
+    [1, 2, 3, 4, 5, 6, 7, 8].map((item: number) => (
+      <SkeletonContactItem key={item} />
+    ));
+
   return (
     <>
-      <Input
-        placeholder="Search in Snapp! Contacts"
-        variant="filled"
-        size="large"
-        suffix={<SearchOutlined className={classes.searchIcon} />}
-      />
+      <SearchInput />
       <RecentContacts />
-      <div
-        style={{
-          marginTop: 12,
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          minHeight: 200,
-        }}
-      >
-        <div style={{ paddingBottom: 5 }}>
-          <XFilled className={classes.bulletIcon} />
-          <label style={{ marginLeft: 8 }}>All Contacts</label>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flex: 1,
-            gap: 10,
-            paddingTop: 5,
-            paddingInline: 2,
-            overflowY: "scroll",
-            scrollbarGutter: "stable both-edges;",
-          }}
-        >
-          {data?.pages.map((page, pageIndex) =>
-            page.items.map((contact, index) => {
-              const isLastItem =
-                pageIndex === data.pages.length - 1 &&
-                index === page.items.length - 1;
-              return (
-                <ContactItem
-                  key={contact.id}
-                  ref={isLastItem ? lastContactRef : null}
-                />
-              );
-            }),
-          )}
-          {isFetchingNextPage && <SkeletonContactItem />}
-        </div>
+      <div className={classes.allContacts}>
+        <AllContactsLabel />
+        {isInitialLoading ? (
+          renderSkeletons()
+        ) : (
+          <div className={classes.contactListContainer}>
+            {isFetchingNextPage && <SkeletonContactItem />}
+            {renderContactItems()}
+          </div>
+        )}
       </div>
       {/* <Link to={`/contact/1`}>Contact #1</Link> */}
     </>
