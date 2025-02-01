@@ -17,6 +17,9 @@ import { ConfigProvider } from "antd";
 
 import { toast } from "react-toastify";
 
+import { I18nextProvider } from "react-i18next";
+import i18n from "./core/localize";
+
 // Handle global errors
 const handleGlobalError = (error: unknown) => {
   if (error instanceof AxiosError) {
@@ -56,7 +59,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <ConfigProvider theme={antDTheme}>
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
       </ConfigProvider>
     </ThemeProvider>
   </QueryClientProvider>,

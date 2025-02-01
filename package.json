@@ -56,6 +56,8 @@
     "react-dom": "^19.0.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-router-dom": "^7.1.4",
-    "react-toastify": "^11.0.3"
+    "react-toastify": "^11.0.3",
+    "i18next": "^23.2.0",
+    "react-i18next": "^13.0.0"
   }
 }
