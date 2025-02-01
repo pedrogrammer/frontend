@@ -2,6 +2,26 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+
+const isAnalyze = process.env.ANALYZE === "true";
+
+const plugins = [
+  new CleanWebpackPlugin(),
+  new HtmlWebpackPlugin({
+    template: "./public/index.html",
+    favicon: "./public/favicon.ico",
+  }),
+  new ESLintPlugin({
+    extensions: ["ts", "tsx"], // Lint TypeScript files
+    failOnError: false, // Prevent Webpack from stopping on lint errors
+    emitWarning: true, // Show warnings in terminal
+  }),
+];
+
+if (isAnalyze) {
+  plugins.push(new BundleAnalyzerPlugin());
+}
 
 module.exports = {
   mode: "development",
@@ -31,18 +51,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      favicon: "./public/favicon.ico",
-    }),
-    new ESLintPlugin({
-      extensions: ["ts", "tsx"], // Lint TypeScript files
-      failOnError: false, // Prevent Webpack from stopping on lint errors
-      emitWarning: true, // Show warnings in terminal
-    }),
-  ],
+  plugins: plugins,
   devServer: {
     static: path.join(__dirname, "dist"),
     compress: true,

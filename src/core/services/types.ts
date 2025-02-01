@@ -5,11 +5,25 @@ export type ContactResponseType = {
   gender: string;
   phone: string;
   note: string;
-  telegram: string;
-  avatar: string;
+  telegram?: string;
+  avatar?: string;
   company: string;
-  address: null;
+  address?: string;
   createdAt: number;
   updatedAt: number;
   id: number;
+};
+
+export type ContactListResponseType = {
+  meta: {
+    skipped: number;
+    limit: number;
+    total: number;
+    criteria: {};
+  };
+  items: ContactResponseType[];
+};
+
+export type ContactListFilterRequestType = {
+  [K in keyof ContactResponseType]?: { contains: string };
 };

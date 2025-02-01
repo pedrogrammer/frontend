@@ -11,6 +11,8 @@ export const useStyles = createUseStyles(
       background: `linear-gradient(to right, ${primary}, ${secondary})`,
     },
     layout: {
+      display: "flex",
+      flexDirection: "column",
       width: 504,
       height: "90vh",
       padding: 12,
