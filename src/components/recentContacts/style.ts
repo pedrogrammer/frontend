@@ -13,4 +13,10 @@ export const useStyles = createUseStyles(({ premier }: Theme) => ({
   bulletIcon: {
     color: premier,
   },
+  contactListContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    paddingInline: 2,
+  },
 }));

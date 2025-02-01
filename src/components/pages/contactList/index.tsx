@@ -177,6 +177,7 @@ function ContactList() {
         <Link to={`/contact/${contact.id}`} key={contact.id}>
           <ContactItem
             ref={isLastItem ? lastContactRef : null}
+            id={contact.id}
             avatarPic={contact.avatar}
             name={`${contact.first_name} ${contact.last_name}`}
             city={contact.address}
