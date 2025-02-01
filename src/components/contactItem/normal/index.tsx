@@ -7,20 +7,37 @@ import {
 import { useStyles } from "../style";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { useFrequentContacts } from "../../../core/hooks/useFrequentContacts";
 
 interface ContactItemProps {
   ref?: ((node: HTMLDivElement | null) => void) | null;
+  id: number;
   avatarPic?: string;
   name: string;
   phone: string;
   city?: string;
 }
 
-function ContactItem({ ref, avatarPic, name, phone, city }: ContactItemProps) {
+function ContactItem({
+  ref,
+  id,
+  avatarPic,
+  name,
+  phone,
+  city,
+}: ContactItemProps) {
   const classes = useStyles();
 
+  const { addContactVisit } = useFrequentContacts();
+
   return (
-    <div ref={ref} className={classes.container}>
+    <div
+      ref={ref}
+      className={classes.container}
+      onClick={() =>
+        addContactVisit({ id, name, phone, avatar: avatarPic, city })
+      }
+    >
       <div className={classes.avatarContainer}>
         {avatarPic ? (
           <LazyLoadImage

@@ -3,9 +3,13 @@ import { XFilled } from "@ant-design/icons";
 import { ContactItem } from "../contactItem";
 import { Empty } from "antd";
 import { useStyles } from "./style";
+import { useFrequentContacts } from "../../core/hooks/useFrequentContacts";
+import { Link } from "react-router-dom";
 
 function RecentContacts() {
   const classes = useStyles();
+
+  const { frequentContacts } = useFrequentContacts();
 
   return (
     <div className={classes.recentContacts}>
@@ -13,15 +17,27 @@ function RecentContacts() {
         <XFilled className={classes.bulletIcon} />
         <label style={{ marginLeft: 8 }}>Recent Contacts</label>
       </div>
-      {true ? (
-        <Empty
-          image={Empty.PRESENTED_IMAGE_SIMPLE}
-          description=""
-          className={classes.empty}
-        />
-      ) : (
-        <ContactItem avatarPic="" name="" phone="" city="" />
-      )}
+      <div className={classes.contactListContainer}>
+        {!!frequentContacts && !!frequentContacts.length ? (
+          frequentContacts.map((item) => (
+            <Link to={`/contact/${item.id}`} key={item.id}>
+              <ContactItem
+                id={item.id}
+                avatarPic={item.avatar}
+                name={item.name}
+                phone={item.phone}
+                city={item.city}
+              />
+            </Link>
+          ))
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description=""
+            className={classes.empty}
+          />
+        )}
+      </div>
     </div>
   );
 }
