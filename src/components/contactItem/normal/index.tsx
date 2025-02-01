@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  CompassOutlined,
+  EnvironmentOutlined,
   PhoneOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -38,10 +38,10 @@ function ContactItem({ ref, avatarPic, name, phone, city }: ContactItemProps) {
         <div className={classes.info}>
           <span>
             <PhoneOutlined style={{ marginRight: 4 }} />
-            {phone}
+            {phone.match(/.{1,3}/g)?.join(" ") || ""}
           </span>
           <span style={{ marginLeft: 10 }}>
-            <CompassOutlined style={{ marginRight: 4 }} />
+            <EnvironmentOutlined style={{ marginRight: 4 }} />
             {city ? city : "N/A"}
           </span>
         </div>

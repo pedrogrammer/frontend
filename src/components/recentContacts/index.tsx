@@ -8,7 +8,7 @@ function RecentContacts() {
   const classes = useStyles();
 
   return (
-    <div style={{ marginTop: 12 }}>
+    <div className={classes.recentContacts}>
       <div style={{ paddingBottom: 10 }}>
         <XFilled className={classes.bulletIcon} />
         <label style={{ marginLeft: 8 }}>Recent Contacts</label>

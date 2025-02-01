@@ -15,7 +15,6 @@ export const useStyles = createUseStyles(
       flexDirection: "column",
       width: 504,
       height: "90vh",
-      padding: 12,
       backgroundColor: "white",
       borderRadius: 20,
       boxShadow: `${shade} 0px 3px 8px`,

@@ -110,7 +110,7 @@ function ContactList() {
   ];
 
   const searchInput = (
-    <Space.Compact>
+    <Space.Compact style={{ paddingInline: 12 }}>
       {filters.input_type.contains === "phone" && (
         <Input
           value={filters.phone?.contains || ""}
@@ -161,37 +161,35 @@ function ContactList() {
     </Space.Compact>
   );
 
-  const AllContactsLabel = () => (
+  const AllContactsLabel = (
     <div style={{ paddingBottom: 5 }}>
       <XFilled className={classes.bulletIcon} />
       <label style={{ marginLeft: 8 }}>All Contacts</label>
     </div>
   );
 
-  const renderContactItems = () => {
-    return contactListData?.pages.map((page, pageIndex) =>
-      page.items.map((contact, index) => {
-        const isLastItem =
-          pageIndex === contactListData.pages.length - 1 &&
-          index === page.items.length - 1;
-        return (
+  const renderContactItems = contactListData?.pages.map((page, pageIndex) =>
+    page.items.map((contact, index) => {
+      const isLastItem =
+        pageIndex === contactListData.pages.length - 1 &&
+        index === page.items.length - 1;
+      return (
+        <Link to={`/contact/${contact.id}`} key={contact.id}>
           <ContactItem
-            key={contact.id}
             ref={isLastItem ? lastContactRef : null}
             avatarPic={contact.avatar}
             name={`${contact.first_name} ${contact.last_name}`}
             city={contact.address}
             phone={contact.phone}
           />
-        );
-      }),
-    );
-  };
+        </Link>
+      );
+    }),
+  );
 
-  const renderSkeletons = () =>
-    [1, 2, 3, 4, 5, 6, 7, 8].map((item: number) => (
-      <SkeletonContactItem key={item} />
-    ));
+  const renderSkeletons = [1, 2, 3, 4, 5, 6, 7, 8].map((item: number) => (
+    <SkeletonContactItem key={item} />
+  ));
 
   const listErrorElement = (
     <div className={classes.listError}>
@@ -205,13 +203,13 @@ function ContactList() {
       {searchInput}
       <RecentContacts />
       <div className={classes.allContacts}>
-        <AllContactsLabel />
+        {AllContactsLabel}
         <div className={classes.contactListContainer}>
           {isLoading ? (
-            renderSkeletons()
+            renderSkeletons
           ) : (
             <>
-              {renderContactItems()}
+              {renderContactItems}
               {isFetchingNextPage && <SkeletonContactItem />}
             </>
           )}
@@ -224,7 +222,6 @@ function ContactList() {
           )}
         </div>
       </div>
-      {/* <Link to={`/contact/1`}>Contact #1</Link> */}
     </>
   );
 }

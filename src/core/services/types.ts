@@ -7,7 +7,7 @@ export type ContactResponseType = {
   note: string;
   telegram?: string;
   avatar?: string;
-  company: string;
+  company?: string;
   address?: string;
   createdAt: number;
   updatedAt: number;
