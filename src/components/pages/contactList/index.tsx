@@ -11,6 +11,7 @@ import { ContactItem, SkeletonContactItem } from "../../contactItem";
 import { useStyles } from "./style";
 import { useGetContactList } from "../../../core/services/hooks";
 import { ContactListFilterRequestType } from "../../../core/services/types";
+import { useTranslation } from "react-i18next";
 
 type ContactListFilterRequestWithInputType = ContactListFilterRequestType & {
   input_type: {
@@ -44,6 +45,7 @@ const filterReducer = (
 
 function ContactList() {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const [filters, dispatch] = useReducer(filterReducer, {
     input_type: { contains: "phone" },
@@ -101,11 +103,11 @@ function ContactList() {
   const searchTypeOptions = [
     {
       value: "phone",
-      label: "Phone",
+      label: t("phone"),
     },
     {
       value: "name",
-      label: "Name",
+      label: t("name"),
     },
   ];
 
@@ -117,7 +119,7 @@ function ContactList() {
           onChange={(e) => {
             dispatch({ type: "SET_PHONE", payload: e.target.value });
           }}
-          placeholder="Search in Snapp! Contacts"
+          placeholder={t("phoneSearchPlaceholder")}
           variant="filled"
           size="large"
           suffix={<SearchOutlined className="searchIcon" />}
@@ -131,7 +133,7 @@ function ContactList() {
             onChange={(e) => {
               dispatch({ type: "SET_FIRST_NAME", payload: e.target.value });
             }}
-            placeholder="First Name"
+            placeholder={t("firstName")}
             variant="filled"
             size="large"
             disabled={isError}
@@ -141,7 +143,7 @@ function ContactList() {
             onChange={(e) => {
               dispatch({ type: "SET_LAST_NAME", payload: e.target.value });
             }}
-            placeholder="Last Name"
+            placeholder={t("lastName")}
             variant="filled"
             size="large"
             disabled={isError}
@@ -164,7 +166,7 @@ function ContactList() {
   const AllContactsLabel = (
     <div style={{ paddingBottom: 5 }}>
       <XFilled className={classes.bulletIcon} />
-      <label style={{ marginLeft: 8 }}>All Contacts</label>
+      <label style={{ marginLeft: 8 }}>{t("allContacts")}</label>
     </div>
   );
 
@@ -195,7 +197,7 @@ function ContactList() {
   const listErrorElement = (
     <div className={classes.listError}>
       <ExclamationCircleOutlined className={classes.listErrorIcon} />
-      <p>Oops, there was an error getting list!</p>
+      <p>{t("loadingListFailed")}</p>
     </div>
   );
 
@@ -218,7 +220,7 @@ function ContactList() {
           {contactListData?.pages[0].meta.total === 0 && (
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description="No matching items found!"
+              description={t("noMatchingItems")}
             />
           )}
         </div>

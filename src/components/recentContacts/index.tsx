@@ -5,9 +5,11 @@ import { Empty } from "antd";
 import { useStyles } from "./style";
 import { useFrequentContacts } from "../../core/hooks/useFrequentContacts";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function RecentContacts() {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const { frequentContacts } = useFrequentContacts();
 
@@ -15,7 +17,7 @@ function RecentContacts() {
     <div className={classes.recentContacts}>
       <div style={{ paddingBottom: 10 }}>
         <XFilled className={classes.bulletIcon} />
-        <label style={{ marginLeft: 8 }}>Recent Contacts</label>
+        <label style={{ marginLeft: 8 }}>{t("recentContacts")}</label>
       </div>
       <div className={classes.contactListContainer}>
         {!!frequentContacts && !!frequentContacts.length ? (

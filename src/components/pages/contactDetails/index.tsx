@@ -10,13 +10,15 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useStyles } from "./style";
+import { useTranslation } from "react-i18next";
 
 function ContactDetails() {
+  const classes = useStyles();
+  const { t } = useTranslation();
+
   const { id } = useParams();
 
   const { data, isError } = useGetContact({ id: id || "0" }, { enabled: !!id });
-
-  const classes = useStyles();
 
   return (
     <div className={classes.contactDetails}>
@@ -30,7 +32,7 @@ function ContactDetails() {
             {isError ? (
               <div>
                 <ExclamationCircleOutlined className={classes.errorIcon} />
-                Oops, error in loading data!
+                {t("loadingDataFailed")}
               </div>
             ) : (
               `${data?.first_name || ""} ${data?.last_name || ""}`
@@ -64,19 +66,19 @@ function ContactDetails() {
       <div style={{ padding: 20 }}>
         <div className={classes.infoContainer}>
           <div className={classes.info}>
-            <div>mobile</div>
+            <div>{t("mobile")}</div>
             <div className={classes.infoData}>
               {data?.phone.match(/.{1,3}/g)?.join(" ") || ""}
             </div>
           </div>
           {data?.telegram && (
             <div className={classes.info}>
-              <div>username</div>
+              <div>{t("username")}</div>
               <div className={classes.infoData}>@{data?.telegram}</div>
             </div>
           )}
           <div>
-            <div>bio</div>
+            <div>{t("bio")}</div>
             <div>{data?.note}</div>
           </div>
         </div>
