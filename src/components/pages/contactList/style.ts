@@ -11,6 +11,8 @@ export const useStyles = createUseStyles(
     },
     allContacts: {
       marginTop: 12,
+      padding: 12,
+      paddingTop: 0,
       display: "flex",
       flexDirection: "column",
       flex: 1,

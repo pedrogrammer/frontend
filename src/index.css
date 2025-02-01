@@ -11,6 +11,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 div::-webkit-scrollbar {
   width: 5px; /* Auto-size on desktop */
 }
