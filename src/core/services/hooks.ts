@@ -6,7 +6,11 @@ import {
 import { AxiosError, AxiosResponse } from "axios";
 import getAxiosInstance from "./config";
 import { CONTACT_LIST_QUERY_KEY, CONTACT_QUERY_KEY } from "./constants";
-import { ContactListResponseType, ContactResponseType } from "./types";
+import {
+  ContactListFilterRequestType,
+  ContactListResponseType,
+  ContactResponseType,
+} from "./types";
 
 const getContact = async (id: string): Promise<ContactResponseType> => {
   const response: AxiosResponse<ContactResponseType> =
@@ -30,19 +34,27 @@ export const useGetContact = (
 
 const getContactList = async ({
   pageParam = 0,
+  filter,
+}: {
+  pageParam: number;
+  filter: ContactListFilterRequestType;
 }): Promise<ContactListResponseType> => {
   const { data }: AxiosResponse<ContactListResponseType> =
     await getAxiosInstance().get("/passenger", {
-      params: { limit: 8, skip: pageParam },
+      params: { limit: 8, skip: pageParam, where: filter },
     });
   return data;
 };
 
-export const useGetContactList = () => {
+export const useGetContactList = ({
+  filter,
+}: {
+  filter: ContactListFilterRequestType;
+}) => {
   return useInfiniteQuery({
-    queryKey: [CONTACT_LIST_QUERY_KEY],
+    queryKey: [CONTACT_LIST_QUERY_KEY, filter],
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getContactList({ pageParam }),
+    queryFn: ({ pageParam }) => getContactList({ pageParam, filter }),
     getNextPageParam: (lastPage) => {
       const { skipped, limit, total } = lastPage.meta;
       const nextSkip = skipped + limit;

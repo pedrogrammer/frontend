@@ -23,3 +23,7 @@ export type ContactListResponseType = {
   };
   items: ContactResponseType[];
 };
+
+export type ContactListFilterRequestType = {
+  [K in keyof ContactResponseType]?: { contains: string };
+};
