@@ -14,8 +14,10 @@ export const useStyles = createUseStyles(({ premier }: Theme) => ({
     color: premier,
   },
   contactListContainer: {
-    display: "flex",
-    flexDirection: "column",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gridTemplateRows: "repeat(2, 1fr)",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 10,
     paddingInline: 2,
   },
