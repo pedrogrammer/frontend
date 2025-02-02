@@ -19,7 +19,7 @@ export type ContactListResponseType = {
     skipped: number;
     limit: number;
     total: number;
-    criteria: {};
+    criteria: ContactListFilterRequestType;
   };
   items: ContactResponseType[];
 };
