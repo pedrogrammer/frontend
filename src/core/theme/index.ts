@@ -2,6 +2,7 @@ interface Theme {
   primary: string;
   secondary: string;
   danger: string;
+  background: string;
   shade: string;
   lightShade: string;
   glassShade: string;
@@ -13,13 +14,14 @@ interface Theme {
   premier: string;
   link: string;
   dark: string;
-  transparent: string;
+  transparentBg: string;
 }
 
 const lightTheme: Theme = {
   primary: "#11998e",
   secondary: "#38ef7d",
   danger: "#EC1C24",
+  background: "#fff",
   shade: "#0000003d",
   lightShade: "#00000029",
   glassShade: "#0000001a",
@@ -31,7 +33,7 @@ const lightTheme: Theme = {
   premier: "#ffd700",
   link: "#5E8ED9",
   dark: "#000000",
-  transparent: "#00000000",
+  transparentBg: "#00000000",
 };
 
 export { lightTheme };

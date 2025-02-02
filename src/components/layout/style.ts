@@ -2,7 +2,7 @@ import { Theme } from "../../core/theme";
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles(
-  ({ primary, secondary, shade }: Theme) => ({
+  ({ primary, secondary, shade, background }: Theme) => ({
     layoutContainer: {
       display: "flex",
       alignItems: "center",
@@ -15,7 +15,7 @@ export const useStyles = createUseStyles(
       flexDirection: "column",
       width: 504,
       height: "90vh",
-      backgroundColor: "white",
+      backgroundColor: background,
       borderRadius: 20,
       boxShadow: `${shade} 0px 3px 8px`,
       overflow: "hidden",
