@@ -9,7 +9,7 @@ export const useStyles = createUseStyles(
     bg,
     link,
     dark,
-    transparent,
+    transparentBg,
     lightText,
     danger,
   }: Theme) => {
@@ -52,8 +52,8 @@ export const useStyles = createUseStyles(
         height: 300,
         backdropFilter: "blur(40px)",
         WebkitBackdropFilter: "blur(40px)",
-        maskImage: `linear-gradient(to top, ${dark} 15%, ${transparent} 100%)`,
-        WebkitMaskImage: `linear-gradient(to top, ${dark} 15%, ${transparent} 100%)`,
+        maskImage: `linear-gradient(to top, ${dark} 15%, ${transparentBg} 100%)`,
+        WebkitMaskImage: `linear-gradient(to top, ${dark} 15%, ${transparentBg} 100%)`,
         pointerEvents: "none",
       },
       topInfoContainer: {
