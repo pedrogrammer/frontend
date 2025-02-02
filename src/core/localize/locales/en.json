@@ -1,0 +1,19 @@
+{
+  "contacts": "Contacts",
+  "loadingDataFailed": "Oops, error in loading data!",
+  "loadingListFailed": "Oops, there was an error getting list!",
+  "mobile": "mobile",
+  "username": "username",
+  "bio": "bio",
+  "name": "Name",
+  "phone": "Phone",
+  "phoneSearchPlaceholder": "Search in Snapp! Contacts",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "allContacts": "All Contacts",
+  "noMatchingItems": "No matching items found!",
+  "404": "404 - Page Not Found",
+  "pageDoesNotExist": "The page you are looking for does not exist.",
+  "goBack": "Go back to Contact List",
+  "recentContacts": "Recent Contacts"
+}
